@@ -5,7 +5,7 @@ class RoutineChooserScreen extends Component {
   render() {
     return (
       <View>
-        <Text>BuilderScreen</Text>
+        <Text>ChooserScreen</Text>
       </View>
     )
   }

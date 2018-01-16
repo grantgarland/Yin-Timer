@@ -1,34 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 
-import AuthScreen from './App/Screens/Auth';
-import WelcomeScreen from './App/Screens/Welcome';
+import MainNavigator from './App/Navigation/MainNavigator';
+
+import Styles from './App/Themes/masterStyles';
 
 export default class App extends React.Component {
   render() {
-    const MainNavigator = TabNavigator({
-      welcome: {
-        screen: WelcomeScreen
-      },
-      auth: {
-        screen: AuthScreen
-      }
-    })
-
+  
     return (
-      <View style={styles.container}>
+      <View style={Styles.screen.mainContainer}>
         <MainNavigator />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-
-    justifyContent: 'center',
-  },
-});

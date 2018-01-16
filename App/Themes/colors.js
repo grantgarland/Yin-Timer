@@ -1,5 +1,7 @@
 const colors = {
   background: '#aaf9cf',
+  green: '#ABF9CF',
+  gong: '#AE8011',
   banner: '#5F3E63',
   bloodOrange: '#fb5f26',
   border: '#483F53',

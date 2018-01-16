@@ -1,28 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 class WelcomeScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text>
-
+      <View>
+        <Button
+          onPress={() => this.props.navigation.navigate('Auth')}
+          title="Login or Signup"
+        />
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-
-    justifyContent: 'center',
-  },
-});
 
 export default WelcomeScreen;

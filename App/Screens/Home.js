@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Button, View, StatusBar } from 'react-native';
 
 class HomeScreen extends Component {
   render() {
     return (
       <View>
-        <Text>HomeScreen</Text>
+        <Button
+          onPress={() => this.props.navigation.navigate('Chooser')}
+          title="Select a Routine"
+        />
+        <Button
+          onPress={() => this.props.navigation.navigate('Builder')}
+          title="Build a Routine"
+        />
       </View>
     )
   }
