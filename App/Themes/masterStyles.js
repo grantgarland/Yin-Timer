@@ -14,28 +14,19 @@ const masterStyles = {
       bottom: 0,
       right: 0
     },
-    section: {
-      // margin: Metrics.section,
-      // padding: Metrics.baseMargin
-    },
     sectionText: {
       ...Fonts.style.normal,
-      // paddingVertical: Metrics.doubleBaseMargin,
       color: Colors.snow,
-      // marginVertical: Metrics.smallMargin,
       textAlign: 'center'
     },
-    subtitle: {
-      color: Colors.snow,
-      // padding: Metrics.smallMargin,
-      // marginBottom: Metrics.smallMargin,
-      // marginHorizontal: Metrics.smallMargin
-    },
     titleText: {
-      ...Fonts.style.h6,
-      fontSize: 77,
-      color: Colors.branch
+      ...Fonts.style.h4,
+      color: Colors.branch,
+      textAlign: 'center',
     }
+  },
+  component: {
+    
   }
 }
 

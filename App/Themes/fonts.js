@@ -1,7 +1,7 @@
 const type = {
-  base: 'Thonburi',
-  bold: 'Thonburi-Bold',
-  emphasis: 'Kailasa'
+  base: 'MalayalamSangamMN',
+  bold: 'MalayalamSangamMN-Bold',
+  emphasis: 'Papyrus'
 }
 
 const size = {

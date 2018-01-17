@@ -2,6 +2,7 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Button } from 'react-native-elements';
 
 import WelcomeScreen from '../Screens/Welcome';
 import AuthScreen from '../Screens/Auth';
@@ -16,11 +17,11 @@ import Colors from '../Themes/colors';
 const AuthNavigator = TabNavigator({
   Welcome: {
     screen: WelcomeScreen,
-    navigationOptions: { tabBarVisible: false }
+    navigationOptions: { tabBarVisible: true }
   },
   Auth: {
     screen: AuthScreen,
-    navigationOptions: { tabBarVisible: false }
+    navigationOptions: { tabBarVisible: true }
   }
 });
 
@@ -37,14 +38,14 @@ const MainNavigator = StackNavigator({
     screen: RoutineChooserScreen,
     path: '/routine/chooser',
     navigationOptions: {
-      title: 'Routines',
+      title: 'Choose a Routine'
     },
   },
   Builder: {
     screen: RoutineBuilderScreen,
     path: '/routine/builder',
     navigationOptions: {
-      title: 'Builder',
+      title: 'Build a Routine',
     },
   },
   Timer: {
