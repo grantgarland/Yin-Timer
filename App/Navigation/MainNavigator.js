@@ -96,8 +96,7 @@ const MainPath = TabNavigator(
       showLabel: false,
       showIcon: true,
       activeTintColor: Colors.gong,
-      activeBackgroundColor: Colors.green,
-      inactiveBackgroundColor: Colors.background,
+      inactiveTintColor: Colors.gong
   },
   }
 );

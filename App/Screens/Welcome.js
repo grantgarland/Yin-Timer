@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
 
 import Slides from '../Components/Slides';
-import SLIDE_DATA from '../Fixtures/Slides';
+import SLIDE_DATA from '../Fixtures/slide_data';
 
 class WelcomeScreen extends Component {
   render() {

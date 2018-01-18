@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import { View, Image, ScrollView, Dimensions } from 'react-native';
 
 import Styles from '../Themes/masterStyles';
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -9,10 +9,14 @@ class Slides extends Component {
     return this.props.data.map((slide) => {
       return (
         <View
-          key={slide.text}
-          style={[slideStyle, { backgroundColor: slide.backgroundColor }]}
-        > 
-          <Text style={ Styles.screen.titleText}>{slide.text}</Text>
+          key={slide.index}
+          style={slideStyle}
+        >
+          <Image
+            style={Styles.screen.backgroundImage}
+            source={slide.image}
+          > 
+          </Image>
         </View>
       )
     })
@@ -20,7 +24,6 @@ class Slides extends Component {
   render() {
     return (
       <ScrollView
-        style={ Styles.screen.mainContainer }
         horizontal
         pagingEnabled
       >

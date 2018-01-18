@@ -5,14 +5,15 @@ const masterStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.background
+      backgroundColor: Colors.transparent
     },
     backgroundImage: {
+      flex: 1,
+      resizeMode: 'center',
       position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0
+      width: '100%',
+      height: '100%',
+      justifyContent: 'center'
     },
     sectionText: {
       ...Fonts.style.normal,

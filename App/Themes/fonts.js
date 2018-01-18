@@ -1,6 +1,6 @@
 const type = {
-  base: 'MalayalamSangamMN',
-  bold: 'MalayalamSangamMN-Bold',
+  base: 'KohinoorTelugu-Regular',
+  bold: 'KohinoorTelugu-Medium',
   emphasis: 'Papyrus'
 }
 
