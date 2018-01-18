@@ -26,8 +26,24 @@ const masterStyles = {
       textAlign: 'center',
     }
   },
-  component: {
-    
+  button: {
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    active: {
+      backgroundColor: Colors.green,
+      width: '100%',
+    },
+    text: {
+      ...Fonts.style.h5,
+      color: Colors.coal,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      letterSpacing: 3
+    }
   }
 }
 

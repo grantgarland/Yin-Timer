@@ -17,11 +17,11 @@ import Colors from '../Themes/colors';
 const AuthNavigator = TabNavigator({
   Welcome: {
     screen: WelcomeScreen,
-    navigationOptions: { tabBarVisible: true }
+    navigationOptions: { tabBarVisible: false }
   },
   Auth: {
     screen: AuthScreen,
-    navigationOptions: { tabBarVisible: true }
+    navigationOptions: { tabBarVisible: false }
   }
 });
 
