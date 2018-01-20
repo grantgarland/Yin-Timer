@@ -1,4 +1,5 @@
 const images = {
+  auth_screen: require('./Images/auth_screen.png'),
   downward_facing_dog: require('./Images/downward_facing_dog.png'),
   forward_lunge: require('./Images/forward_lunge.png'),
   half_saddle_fold: require('./Images/half_saddle_fold.png'),

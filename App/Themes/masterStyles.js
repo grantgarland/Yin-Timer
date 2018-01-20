@@ -7,13 +7,20 @@ const masterStyles = {
       flex: 1,
       backgroundColor: Colors.transparent
     },
+    buttonContainer: {
+      flex: 1,
+      flexWrap: 'wrap', 
+      flexDirection: 'column',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     backgroundImage: {
       flex: 1,
-      resizeMode: 'center',
       position: 'absolute',
       width: '100%',
       height: '100%',
-      justifyContent: 'center'
+      flexWrap: 'wrap',
     },
     sectionText: {
       ...Fonts.style.normal,
@@ -29,16 +36,21 @@ const masterStyles = {
   button: {
     container: {
       flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
+      alignItems: 'flex-start',
       alignItems: 'center'
     },
     active: {
       backgroundColor: Colors.green,
+      borderRadius: 5,
+      width: 275,
+    },
+    passive: {
+      backgroundColor: Colors.snow,
+      borderRadius: 5,
       width: '100%',
     },
     text: {
-      ...Fonts.style.h5,
+      ...Fonts.style.description,
       color: Colors.coal,
       textAlign: 'center',
       fontWeight: 'bold',
