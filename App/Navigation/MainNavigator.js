@@ -9,7 +9,7 @@ import AuthScreen from '../Screens/Auth';
 // import CreateUserScreen from '../Screens/Auth/CreateUser';
 // import ValidationScreen from '../Screens/Auth/Validation';
 // import LoginScreen from '../Screens/Auth/Login';
-// import FacebookLoginScreen from '../Screens/Auth/Facebook';
+import FacebookScreen from '../Screens/Auth/Facebook';
 
 import HomeScreen from '../Screens/Home';
 import RoutineChooserScreen from '../Screens/RoutineChooser';
@@ -40,11 +40,11 @@ const AuthPath = StackNavigator({
   //   path: '/auth/login',
   //   navigationOptions: { tabBarVisible: true }
   // },
-  // Facebook: {
-  //   screen: FacebookScreen,
-  //   path: '/auth/facebook',
-  //   navigationOptions: { tabBarVisible: true }
-  // },
+  Facebook: {
+    screen: FacebookScreen,
+    path: '/auth/facebook',
+    navigationOptions: { header: null }
+  },
 })
 
 const AuthNavigator = TabNavigator({
@@ -56,6 +56,9 @@ const AuthNavigator = TabNavigator({
     screen: AuthPath,
     navigationOptions: { tabBarVisible: true }
   }
+},
+{
+  lazy: true
 });
 
 const MainNavigator = StackNavigator({

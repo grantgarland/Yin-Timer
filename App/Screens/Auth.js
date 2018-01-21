@@ -1,31 +1,16 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, Dimensions } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
+import * as actions from '../Redux/Actions/auth_actions';
+import auth_buttons from'../Fixtures/auth_buttons';
 import Styles from '../Themes/masterStyles';
 import Images from '../Themes/images';
 
 class AuthScreen extends Component {
-  auth_buttons = [
-    {
-      text: 'Log In',
-      action: 'Home',
-      height: Dimensions.get('window').height / 4
-    }, 
-    {
-      text: 'Sign Up',
-      action: 'Home',
-      height: 30   
-    },
-    {
-      text: 'Sign Up with Facebook',
-      action: 'Home',
-      height: 30       
-    }
-  ];
-
   renderButtons() {
-    return this.auth_buttons.map((button, index) => {
+    return auth_buttons.map((button, index) => {
       return ( 
         <View key={index} style={{marginTop: button.height}} >
           <Button
@@ -53,4 +38,4 @@ class AuthScreen extends Component {
   }
 }
 
-export default AuthScreen;
+export default connect(null, actions)(AuthScreen);
