@@ -6,6 +6,11 @@ import { Button } from 'react-native-elements';
 
 import WelcomeScreen from '../Screens/Welcome';
 import AuthScreen from '../Screens/Auth';
+// import CreateUserScreen from '../Screens/Auth/CreateUser';
+// import ValidationScreen from '../Screens/Auth/Validation';
+// import LoginScreen from '../Screens/Auth/Login';
+// import FacebookLoginScreen from '../Screens/Auth/Facebook';
+
 import HomeScreen from '../Screens/Home';
 import RoutineChooserScreen from '../Screens/RoutineChooser';
 import RoutineBuilderScreen from '../Screens/RoutineBuilder';
@@ -14,16 +19,42 @@ import SettingsScreen from '../Screens/Settings';
 
 import Colors from '../Themes/colors';
 
+const AuthPath = StackNavigator({
+  Auth: {
+    screen: AuthScreen,
+    path: '/auth',
+    navigationOptions: { header: null }
+  },
+  // CreateUser: {
+  //   screen: CreateUserScreen,
+  //   path: '/auth/create_user',
+  //   navigationOptions: { tabBarVisible: true }
+  // },
+  // Validation: {
+  //   screen: ValidationScreen,
+  //   path: '/auth/validate',
+  //   navigationOptions: { tabBarVisible: true }
+  // },
+  // Login: {
+  //   screen: LoginScreen,
+  //   path: '/auth/login',
+  //   navigationOptions: { tabBarVisible: true }
+  // },
+  // Facebook: {
+  //   screen: FacebookScreen,
+  //   path: '/auth/facebook',
+  //   navigationOptions: { tabBarVisible: true }
+  // },
+})
+
 const AuthNavigator = TabNavigator({
   Welcome: {
     screen: WelcomeScreen,
     navigationOptions: { tabBarVisible: true }
-    
   },
   Auth: {
-    screen: AuthScreen,
+    screen: AuthPath,
     navigationOptions: { tabBarVisible: true }
-    
   }
 });
 

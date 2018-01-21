@@ -10,25 +10,24 @@ class AuthScreen extends Component {
     {
       text: 'Log In',
       action: 'Home',
-      location: {
-        height: Dimensions.get('window').height / 3,
-        width: 5
-      }
+      height: Dimensions.get('window').height / 4
     }, 
     {
       text: 'Sign Up',
       action: 'Home',
-      location: {
-        height: -200,
-        width: 5
-      }        
+      height: 30   
+    },
+    {
+      text: 'Sign Up with Facebook',
+      action: 'Home',
+      height: 30       
     }
   ];
 
   renderButtons() {
     return this.auth_buttons.map((button, index) => {
       return ( 
-        <View key={index} style={[Styles.button.container, {marginTop: button.location.height }]} >
+        <View key={index} style={{marginTop: button.height}} >
           <Button
             raised
             buttonStyle={Styles.button.active}
@@ -45,7 +44,9 @@ class AuthScreen extends Component {
     return (
       <View style={Styles.screen.mainContainer} >
         <ImageBackground style={Styles.screen.backgroundImage} source={Images.auth_screen} >
+          <View style={Styles.screen.buttonContainer} >
             {this.renderButtons()}
+          </View>
         </ImageBackground>
       </View>
     )

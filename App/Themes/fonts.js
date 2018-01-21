@@ -1,7 +1,7 @@
 const type = {
   base: 'KohinoorTelugu-Regular',
   bold: 'KohinoorTelugu-Medium',
-  emphasis: 'Papyrus'
+  emphasis: 'OriyaSangamMN-Bold'
 }
 
 const size = {
@@ -13,7 +13,7 @@ const size = {
   h6: 19,
   input: 18,
   regular: 17,
-  medium: 14,
+  medium: 15,
   small: 12,
   tiny: 8.5
 }
@@ -48,7 +48,7 @@ const style = {
     fontSize: size.regular
   },
   description: {
-    fontFamily: type.base,
+    fontFamily: type.bold,
     fontSize: size.medium
   }
 }

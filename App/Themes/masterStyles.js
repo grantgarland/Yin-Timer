@@ -12,7 +12,6 @@ const masterStyles = {
       flexWrap: 'wrap', 
       flexDirection: 'column',
       display: 'flex',
-      justifyContent: 'center',
       alignItems: 'center',
     },
     backgroundImage: {
@@ -53,8 +52,7 @@ const masterStyles = {
       ...Fonts.style.description,
       color: Colors.coal,
       textAlign: 'center',
-      fontWeight: 'bold',
-      letterSpacing: 3
+      letterSpacing: 2
     }
   }
 }
