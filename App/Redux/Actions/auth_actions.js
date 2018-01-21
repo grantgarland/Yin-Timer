@@ -1,10 +1,15 @@
 import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 
-import { FACEBOOK_LOGIN_SUCCESS, FACEBOOK_LOGIN_FAIL } from './types';
+import {
+  FACEBOOK_LOGIN_SUCCESS,
+  FACEBOOK_LOGIN_FAIL
+} from './types';
 
 export const facebookLogin = () => async dispatch => {
+  //NOTE: switch these statements when testing fb auth flow
   let token = await AsyncStorage.getItem('fb_token');
+  // AsyncStorage.removeItem('fb_token');
   
   if (token) {
     dispatch({ action: FACEBOOK_LOGIN_SUCCESS, payload: token })

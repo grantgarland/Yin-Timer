@@ -3,10 +3,10 @@ import { View, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import * as actions from '../Redux/Actions/auth_actions';
-import auth_buttons from'../Fixtures/auth_buttons';
-import Styles from '../Themes/masterStyles';
-import Images from '../Themes/images';
+import * as actions from '../../Redux/Actions/auth_actions';
+import auth_buttons from'../../Fixtures/auth_buttons';
+import Styles from '../../Themes/masterStyles';
+import Images from '../../Themes/images';
 
 class AuthScreen extends Component {
   renderButtons() {
@@ -18,11 +18,20 @@ class AuthScreen extends Component {
             buttonStyle={Styles.button.active}
             textStyle={Styles.button.text}
             title={button.text}
-            onPress={() => this.props.navigation.navigate(button.action)}
+            onPress={() => this.deployAction(button.action)}
           />
         </View>
       )
     })
+  }
+
+  deployAction(type) {
+    switch(type) {
+      case 'Facebook':
+        return this.props.facebookLogin();
+      default:
+        return null;
+    }
   }
 
   render() {
