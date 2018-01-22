@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 import WelcomeScreen from '../Screens/Welcome';
 import AuthScreen from '../Screens/Auth/Auth';
 import LoginScreen from '../Screens/Auth/Login';
-// import CreateUserScreen from '../Screens/Auth/CreateUser';
+import SignupScreen from '../Screens/Auth/Signup';
 // import ValidationScreen from '../Screens/Auth/Validation';
 
 import HomeScreen from '../Screens/Home';
@@ -27,13 +27,13 @@ const AuthPath = StackNavigator({
   Login: {
     screen: LoginScreen,
     path: '/auth/login',
-    navigationOptions: { tabBarVisible: true }
+    navigationOptions: { header: null }
+  },
+  Signup: {
+    screen: SignupScreen,
+    path: '/auth/signup',
+    navigationOptions: { header: null }
   }
-  // CreateUser: {
-  //   screen: CreateUserScreen,
-  //   path: '/auth/create_user',
-  //   navigationOptions: { tabBarVisible: true }
-  // },
   // Validation: {
   //   screen: ValidationScreen,
   //   path: '/auth/validate',
@@ -44,11 +44,11 @@ const AuthPath = StackNavigator({
 const AuthNavigator = TabNavigator({
   Welcome: {
     screen: WelcomeScreen,
-    navigationOptions: { tabBarVisible: true }
+    navigationOptions: { tabBarVisible: false }
   },
   Auth: {
     screen: AuthPath,
-    navigationOptions: { tabBarVisible: true }
+    navigationOptions: { tabBarVisible: false }
   }
 },
 {

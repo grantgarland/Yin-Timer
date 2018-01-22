@@ -14,7 +14,7 @@ class WelcomeScreen extends Component {
   async componentWillMount() {
     let token = await AsyncStorage.getItem('fb_token');
     this.setState({ token: false });
-    token ? this.navigateToHome() : this.onAuthComplete(this.props);
+    !token ? this.navigateToHome() : this.onAuthComplete(this.props);
   }
   
   onAuthComplete(props) {
@@ -24,7 +24,9 @@ class WelcomeScreen extends Component {
   }
 
   navigateToHome = () => {
-    this.props.navigation.navigate('Home');
+    // FOR TESTING TOGGLE 'AUTH'
+    this.props.navigation.navigate('Auth');
+    // this.props.navigation.navigate('Home');
   }
 
   navigateToAuth = () => {

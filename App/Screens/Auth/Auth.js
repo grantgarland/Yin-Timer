@@ -27,6 +27,10 @@ class AuthScreen extends Component {
 
   deployAction(type) {
     switch(type) {
+      case 'Log In':
+        return this.props.navigation.navigate('Login')
+      case 'Sign Up':
+        return this.props.navigation.navigate('Signup')
       case 'Facebook':
         return this.props.facebookLogin();
       default:

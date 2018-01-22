@@ -6,12 +6,12 @@ import * as actions from '../Redux/Actions/auth_actions';
 const auth_buttons = [
   {
     text: 'Log In',
-    action: 'Home',
+    action: 'Log In',
     height: Dimensions.get('window').height / 4
   }, 
   {
     text: 'Sign Up',
-    action: 'Home',
+    action: 'Sign Up',
     height: 30   
   },
   {

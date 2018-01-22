@@ -1,5 +1,9 @@
+import { Dimensions } from 'react-native';
+
 import Fonts from './fonts'
 import Colors from './colors'
+
+const { height, width } = Dimensions.get('window');
 
 const masterStyles = {
   screen: {
@@ -14,6 +18,16 @@ const masterStyles = {
       display: 'flex',
       alignItems: 'center',
     },
+    formContainer: {
+      flexDirection: 'column',
+      marginTop: height / 5,
+      margin: width / 9
+    },
+    formItem : {
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      margin: 20
+    },
     backgroundImage: {
       flex: 1,
       position: 'absolute',
@@ -26,10 +40,13 @@ const masterStyles = {
       color: Colors.snow,
       textAlign: 'center'
     },
-    titleText: {
-      ...Fonts.style.h4,
-      color: Colors.branch,
-      textAlign: 'center',
+    titleText: {  
+      ...Fonts.style.h1,
+      color: Colors.branch
+    },
+    formText: {
+      ...Fonts.style.normal,
+      textAlign: 'center'
     }
   },
   button: {
@@ -46,6 +63,12 @@ const masterStyles = {
     passive: {
       backgroundColor: Colors.snow,
       borderRadius: 5,
+      width: '100%',
+    },
+    auth: {
+      backgroundColor: Colors.green,
+      borderRadius: 5,
+
       width: '100%',
     },
     text: {
