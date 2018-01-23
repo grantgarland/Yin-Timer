@@ -17,7 +17,6 @@ class SignupScreen extends Component {
     }
 
     this.updateInfo = this.updateInfo.bind(this)
-    this.renderInfo = this.renderInfo.bind(this)
   }
 
   updateInfo(){
@@ -27,14 +26,10 @@ class SignupScreen extends Component {
     })
   }
 
-  renderInfo(){
-    if(this.state.value)
-    return (
-        <View style={styles.info}>
-          <Text>Is Valid: <Text style={{fontWeight:'bold'}}>{this.state.valid.toString()}</Text></Text>
-          <Text>Value: <Text style={{fontWeight:'bold'}}>{this.state.value}</Text></Text>
-        </View>
-    )
+  validateNumber(){
+    if (this.state.value && this.state.valid) {
+      return true
+    }
   }
 
   render() {
@@ -42,13 +37,16 @@ class SignupScreen extends Component {
       <View style={Styles.screen.mainContainer} >
         <ImageBackground style={Styles.screen.backgroundImage} source={Images.auth_screen} >
           <View style={Styles.screen.formContainer}>
-            <FormLabel style={Styles.screen.titleText}>ENTER PHONE NUMBER</FormLabel>
+            <FormLabel labelStyle={Styles.screen.formText}>ENTER PHONE NUMBER</FormLabel>
             <View style={Styles.screen.formItem}>
               <PhoneInput 
-                style={{ marginTop: 10}}
+                textStyle={Styles.screen.formText}
+                textProps={{placeholder: '+1 555 555 5555'}}
+                keyboardType = 'numeric'
                 ref='phone'
                 initialCountry='us'
                 offset={5}
+                onChangePhoneNumber={() => this.updateInfo()}
               />
             </View>
             <Button
@@ -56,7 +54,8 @@ class SignupScreen extends Component {
               style={{marginTop: 30}}
               buttonStyle={Styles.button.auth}
               textStyle={Styles.button.text}
-              title="Verify Number" />
+              title="Verify Number"
+              onPress={() => this.validateNumber()} />
           </View>
         </ImageBackground>
       </View>

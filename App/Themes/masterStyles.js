@@ -21,12 +21,17 @@ const masterStyles = {
     formContainer: {
       flexDirection: 'column',
       marginTop: height / 5,
-      margin: width / 9
+      margin: width / 20
     },
     formItem : {
       flexDirection: 'column',
       justifyContent: 'flex-start',
-      margin: 20
+      backgroundColor: Colors.transparent,
+      height: 35,
+      margin: 20,
+      borderStyle: 'solid',
+      borderBottomWidth: 1.3,
+      borderBottomColor: 'black',
     },
     backgroundImage: {
       flex: 1,
@@ -35,18 +40,19 @@ const masterStyles = {
       height: '100%',
       flexWrap: 'wrap',
     },
-    sectionText: {
+    labelText: {
       ...Fonts.style.normal,
-      color: Colors.snow,
-      textAlign: 'center'
+      color: 'black',
+      textAlign: 'left'
     },
     titleText: {  
       ...Fonts.style.h1,
-      color: Colors.branch
+      color: Colors.charcoal
     },
     formText: {
-      ...Fonts.style.normal,
-      textAlign: 'center'
+      ...Fonts.style.description,
+      textAlign: 'left',
+      color: 'black'
     }
   },
   button: {

@@ -23,7 +23,7 @@ const colors = {
   steel: '#CCCCCC',
   text: '#E0D7E5',
   transparent: 'rgba(0,0,0,0)',
-  windowTint: 'rgba(0, 0, 0, 0.4)'
+  windowTint: 'rgba(0, 0, 0, 0.1)'
 }
 
 export default colors
