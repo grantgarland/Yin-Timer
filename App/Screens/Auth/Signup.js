@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, Alert} from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { View, Text, ImageBackground, TouchableOpacity, AsyncStorage } from 'react-native';
+import { FormLabel, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import PhoneInput from 'react-native-phone-input';
 import axios from 'axios';
@@ -16,8 +16,6 @@ class SignupScreen extends Component {
         valid: '',
         value: ''
     }
-
-    this.updateInfo = this.updateInfo.bind(this)
   }
 
   updateInfo(){
@@ -33,21 +31,21 @@ class SignupScreen extends Component {
 
     if (this.state.value && this.state.valid) {
       try {
-        let first = await axios.post(CREATE_USER_URL, { phone: this.state.value });
+        let phone = this.state.value.toString();
+        
+        await AsyncStorage.setItem('phone', phone)
 
-        let second = await axios.post(SEND_CODE_URL, { phone: this.state.value });
+        await axios.post(CREATE_USER_URL, { phone: this.state.value });
+
+        await axios.post(SEND_CODE_URL, { phone: this.state.value });
+
+        this.props.navigation.navigate('Validate');
       } catch (error) {
-        this.alert('There was a problem with the network. Please try again.')
+        alert('User already exists. Please use log in screen.')
       }
     } else {
-      this.alert('Please check number provided');
+      alert('Invalid phone number provided.');
     }
-  }
-
-  alert(error) {
-    Alert.alert(
-      { cancelable: false }
-    )
   }
 
   render() {
@@ -64,7 +62,7 @@ class SignupScreen extends Component {
                 ref='phone'
                 initialCountry='us'
                 offset={5}
-                onChangePhoneNumber={() => this.handleSubmit()}
+                onChangePhoneNumber={() => this.updateInfo()}
               />
             </View>
             <Button
@@ -73,7 +71,14 @@ class SignupScreen extends Component {
               buttonStyle={Styles.button.auth}
               textStyle={Styles.button.text}
               title="Verify Number"
-              onPress={() => alert('There was a problem with the network. Please try again later.')} />
+              onPress={() => this.handleSubmit()} />
+            <Button
+              transparent
+              style={{marginTop: 30, marginLeft: -10}}
+              textStyle={Styles.button.text}
+              leftIcon={{name: 'navigate-before', color: 'black'}}
+              title="Back"
+              onPress={() => {this.props.navigation.navigate('Auth')}} />
           </View>
         </ImageBackground>
       </View>

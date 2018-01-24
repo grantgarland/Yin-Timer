@@ -8,7 +8,7 @@ import WelcomeScreen from '../Screens/Welcome';
 import AuthScreen from '../Screens/Auth/Auth';
 import LoginScreen from '../Screens/Auth/Login';
 import SignupScreen from '../Screens/Auth/Signup';
-// import ValidationScreen from '../Screens/Auth/Validation';
+import ValidationScreen from '../Screens/Auth/Validation';
 
 import HomeScreen from '../Screens/Home';
 import RoutineChooserScreen from '../Screens/RoutineChooser';
@@ -33,12 +33,12 @@ const AuthPath = StackNavigator({
     screen: SignupScreen,
     path: '/auth/signup',
     navigationOptions: { header: null }
+  },
+  Validate: {
+    screen: ValidationScreen,
+    path: '/auth/validate',
+    navigationOptions: { header: null }
   }
-  // Validation: {
-  //   screen: ValidationScreen,
-  //   path: '/auth/validate',
-  //   navigationOptions: { tabBarVisible: true }
-  // }
 })
 
 const AuthNavigator = TabNavigator({
