@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, Alert} from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import PhoneInput from 'react-native-phone-input';
+import axios from 'axios';
 
 import * as actions from '../../Redux/Actions/auth_actions';
 import Styles from '../../Themes/masterStyles';
@@ -26,10 +27,27 @@ class SignupScreen extends Component {
     })
   }
 
-  validateNumber(){
+  async handleSubmit() {
+    const CREATE_USER_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/createUser';
+    const SEND_CODE_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/requestPassword';
+
     if (this.state.value && this.state.valid) {
-      return true
+      try {
+        let first = await axios.post(CREATE_USER_URL, { phone: this.state.value });
+
+        let second = await axios.post(SEND_CODE_URL, { phone: this.state.value });
+      } catch (error) {
+        this.alert('There was a problem with the network. Please try again.')
+      }
+    } else {
+      this.alert('Please check number provided');
     }
+  }
+
+  alert(error) {
+    Alert.alert(
+      { cancelable: false }
+    )
   }
 
   render() {
@@ -46,7 +64,7 @@ class SignupScreen extends Component {
                 ref='phone'
                 initialCountry='us'
                 offset={5}
-                onChangePhoneNumber={() => this.updateInfo()}
+                onChangePhoneNumber={() => this.handleSubmit()}
               />
             </View>
             <Button
@@ -55,32 +73,12 @@ class SignupScreen extends Component {
               buttonStyle={Styles.button.auth}
               textStyle={Styles.button.text}
               title="Verify Number"
-              onPress={() => this.validateNumber()} />
+              onPress={() => alert('There was a problem with the network. Please try again later.')} />
           </View>
         </ImageBackground>
       </View>
     )
   }
 }
-
-let styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      alignItems: 'center',
-      padding: 20,
-      paddingTop: 60
-  },
-  info: {
-      //width: 200,
-      borderRadius: 5,
-      backgroundColor: '#f0f0f0',
-      padding:10,
-      marginTop: 20,
-  },
-  button:{
-      marginTop: 20,
-      padding: 10,
-  }
-})
 
 export default connect(null, actions)(SignupScreen);
