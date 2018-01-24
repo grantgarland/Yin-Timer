@@ -1,7 +1,4 @@
 import { Dimensions } from 'react-native';
-import { connect } from 'react-redux';
-
-import * as actions from '../Redux/Actions/auth_actions';
 
 const auth_buttons = [
   {

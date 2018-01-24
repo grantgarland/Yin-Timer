@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, Header } from 'react-navigation';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Button } from 'react-native-elements';
@@ -60,7 +60,6 @@ const MainNavigator = StackNavigator({
     screen: HomeScreen,
     path: '/',
     navigationOptions: {
-      title: 'Back',
       header: null
     },
   },

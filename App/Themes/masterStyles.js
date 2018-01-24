@@ -9,7 +9,7 @@ const masterStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.transparent
+      backgroundColor: Colors.green
     },
     buttonContainer: {
       flex: 1,
@@ -39,6 +39,14 @@ const masterStyles = {
       width: '100%',
       height: '100%',
       flexWrap: 'wrap',
+    },
+    header: {
+      marginTop: -(Dimensions.get('window').height / 10),
+      marginLeft: 30,
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     labelText: {
       ...Fonts.style.normal,
@@ -82,6 +90,14 @@ const masterStyles = {
       color: Colors.coal,
       textAlign: 'center',
       letterSpacing: 2
+    }
+  },
+  card: {
+    container: {
+      flex: 1,
+      justifyContent: 'center', 
+      flexDirection: 'column',
+      alignItems: 'center',
     }
   }
 }
