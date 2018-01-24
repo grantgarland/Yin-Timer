@@ -33,14 +33,14 @@ class SignupScreen extends Component {
 
       if (phone === this.state.value) {
         try {  
-          await axios.post(SEND_CODE_URL, { phone: this.state.value });
+          await axios.post(SEND_CODE_URL, { phone: phone });
   
           this.props.navigation.navigate('Validate');
         } catch (error) {
           alert('Network error. Please try again.')
         }
       } else {
-        alert('User not found. Please sign up.');
+        alert('User not found. Please try signing up.');
       }
     }
   }

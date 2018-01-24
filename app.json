@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "yin-timer",
-    "description": "This project is really great.",
+    "name": "Yin Timer",
+    "description": "A stretching companion app.",
     "slug": "yin-timer",
     "privacy": "public",
     "sdkVersion": "24.0.0",

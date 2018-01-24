@@ -2,9 +2,21 @@ import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 
 import {
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
   FACEBOOK_LOGIN_SUCCESS,
   FACEBOOK_LOGIN_FAIL
 } from './types';
+
+export const login = (jwt) => async dispatch => {
+  if (jwt) {
+    await AsyncStorage.setItem('jwt', jwt);
+
+    dispatch({ type: LOGIN_SUCCESS, payload: jwt});
+  } else {
+    dispatch({ type: LOGIN_FAIL })
+  }
+}
 
 export const facebookLogin = () => async dispatch => {
   //NOTE: switch these statements when testing fb auth flow

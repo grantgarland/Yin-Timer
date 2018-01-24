@@ -9,6 +9,12 @@ import Styles from '../../Themes/masterStyles';
 import Images from '../../Themes/images';
 
 class AuthScreen extends Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.token) {
+      this.props.navigation.navigate('Home');
+    }
+  }
+
   renderButtons() {
     return auth_buttons.map((button, index) => {
       return ( 
@@ -51,4 +57,8 @@ class AuthScreen extends Component {
   }
 }
 
-export default connect(null, actions)(AuthScreen);
+function mapStateToProps({ auth }) {
+  return { token: auth.token };
+}
+
+export default connect(mapStateToProps, actions)(AuthScreen);

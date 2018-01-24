@@ -25,16 +25,20 @@ class ValidationScreen extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.jwt) {
+      this.props.navigation.navigate('Home');
+    }
+  }
+
 
   async handleSubmit() {
     const VERIFY_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/verifyPassword';
 
     try {
-      let jwt = await axios.post(VERIFY_URL, { phone: this.state.phone, code: this.state.code });
-
-      await AsyncStorage.setItem('jwt', jwt);
-
-      this.props.navigation.navigate('Home');
+      let  { data } = await axios.post(VERIFY_URL, { phone: this.state.phone, code: this.state.code });
+      
+      this.props.login(data.token);
     } catch (error) {
       alert('Invalid code. Please try agains')
     }
@@ -75,4 +79,8 @@ class ValidationScreen extends Component {
   }
 }
 
-export default connect(null, actions)(ValidationScreen);
+function mapStateToProps({ auth }) {
+  return { jwt: auth.jwt };
+}
+
+export default connect(mapStateToProps, actions)(ValidationScreen);

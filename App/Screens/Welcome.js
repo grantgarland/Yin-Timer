@@ -13,24 +13,14 @@ class WelcomeScreen extends Component {
 
   async componentWillMount() {
     let token = await AsyncStorage.getItem('fb_token');
+    let jwt = await AsyncStorage.getItem('jwt');
+
+    // this ensurs user is sent from AppLoading screen to Auth/Welcome screen
     this.setState({ token: false });
-    !token ? this.navigateToHome() : this.onAuthComplete(this.props);
-  }
-  
-  onAuthComplete(props) {
-    if (props.token) {
-      this.navigateToHome()
+
+    if (token || jwt) {
+      this.props.navigation.navigate('Home');
     }
-  }
-
-  navigateToHome = () => {
-    // FOR TESTING TOGGLE 'AUTH'
-    this.props.navigation.navigate('Auth');
-    // this.props.navigation.navigate('Home');
-  }
-
-  navigateToAuth = () => {
-    this.props.navigation.navigate('Auth');
   }
 
   render() {
@@ -38,7 +28,7 @@ class WelcomeScreen extends Component {
       return <AppLoading />
     } else {
       return (
-        <Slides data={SLIDE_DATA} onComplete={this.navigateToAuth}/>
+        <Slides data={SLIDE_DATA} onComplete={() => this.props.navigation.navigate('Auth')}/>
       );
     }
   }
