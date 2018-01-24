@@ -30,9 +30,11 @@ class ValidationScreen extends Component {
     const VERIFY_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/verifyPassword';
 
     try {
-      await axios.post(VERIFY_URL, { phone: this.state.phone, code: this.state.code });
+      let jwt = await axios.post(VERIFY_URL, { phone: this.state.phone, code: this.state.code });
 
-      this.props.navigation.navigate('Home')
+      await AsyncStorage.setItem('jwt', jwt);
+
+      this.props.navigation.navigate('Home');
     } catch (error) {
       alert('Invalid code. Please try agains')
     }
