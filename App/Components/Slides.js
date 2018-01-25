@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { View, Image, Dimensions } from 'react-native';
-import { Button } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 
+import Button from '../Components/LoadingButton';
 import Styles from '../Themes/masterStyles';
 import Colors from '../Themes/colors';
 
 class Slides extends Component {
   renderLastSlide(index) {
     if (index === this.props.data.length - 1) {
-      const button_margin = Dimensions.get('window').height - 120;
+      const button_margin = Dimensions.get('window').height - 150;
 
       return (
         <View style={[Styles.button.container, {marginTop: button_margin}]} >
           <Button
-            raised
-            buttonStyle={Styles.button.active}
+            viewStyle={Styles.button.active}
             textStyle={Styles.button.text}
             title="Get Started"
             onPress={this.props.onComplete}

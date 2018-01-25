@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, ImageBackground } from 'react-native';
-import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import * as actions from '../../Redux/Actions/auth_actions';
-import auth_buttons from'../../Fixtures/auth_buttons';
+import auth_buttons from '../../Fixtures/auth_buttons';
+import Button from '../../Components/LoadingButton';
 import Styles from '../../Themes/masterStyles';
 import Images from '../../Themes/images';
 
@@ -20,9 +20,8 @@ class AuthScreen extends Component {
       return ( 
         <View key={index} style={{marginTop: button.height}} >
           <Button
-            raised
-            buttonStyle={Styles.button.active}
-            textStyle={Styles.button.text}
+            viewStyle={button.facebook ? Styles.button.facebook: Styles.button.active}
+            textStyle={button.facebook ? Styles.button.facebookText : Styles.button.text }
             title={button.text}
             onPress={() => this.deployAction(button.action)}
           />

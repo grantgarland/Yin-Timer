@@ -20,7 +20,8 @@ const masterStyles = {
     },
     formContainer: {
       flexDirection: 'column',
-      marginTop: height / 5,
+      backgroundColor: Colors.transparent,
+      marginTop: height / 4,
       margin: width / 20
     },
     formItem : {
@@ -29,6 +30,7 @@ const masterStyles = {
       backgroundColor: Colors.transparent,
       height: 35,
       margin: 20,
+      marginBottom: 30,
       borderStyle: 'solid',
       borderBottomWidth: 1.3,
       borderBottomColor: 'black',
@@ -58,7 +60,7 @@ const masterStyles = {
       color: Colors.charcoal
     },
     formText: {
-      ...Fonts.style.description,
+      ...Fonts.style.normal,
       textAlign: 'left',
       color: 'black'
     }
@@ -70,24 +72,37 @@ const masterStyles = {
       alignItems: 'center'
     },
     active: {
+      width: Dimensions.get('window').width / 1.5,
+      height: 60,
       backgroundColor: Colors.green,
-      borderRadius: 5,
-      width: 275,
+      borderRadius: 50
     },
     passive: {
-      backgroundColor: Colors.snow,
-      borderRadius: 5,
-      width: '100%',
+      width: Dimensions.get('window').width / 1.5,
+      height: 60,
+      backgroundColor: Colors.gong,
+      borderRadius: 50
+    },
+    facebook: {
+      width: Dimensions.get('window').width / 1.5,
+      height: 60,
+      backgroundColor: Colors.facebook,
+      borderRadius: 50
     },
     auth: {
       backgroundColor: Colors.green,
       borderRadius: 5,
-
       width: '100%',
     },
     text: {
-      ...Fonts.style.description,
+      ...Fonts.style.emphasis,
       color: Colors.coal,
+      textAlign: 'center',
+      letterSpacing: 2
+    },
+    facebookText: {
+      ...Fonts.style.facebook,
+      color: Colors.snow,
       textAlign: 'center',
       letterSpacing: 2
     }

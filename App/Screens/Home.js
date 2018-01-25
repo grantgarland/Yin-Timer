@@ -1,30 +1,38 @@
 import React, { Component } from 'react';
-import { Button, View, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 
-import HOME_BUTTONS from '../Fixtures/home_buttons';
+import Button from '../Components/LoadingButton';
+
 
 import Styles from '../Themes/masterStyles';
 import Images from '../Themes/images'
 
 class HomeScreen extends Component {
-  renderButtons() {
-    return HOME_BUTTONS.map((button, index) => {
-      return (
-        <TouchableOpacity key={index} onPress={() => this.props.navigation.navigate(button.page)} >
-          <Card style={Styles.screen.backgroundImage} />
-        </TouchableOpacity>
-      )
-    })
+  constructor(props){
+    super(props);
+    this.state = {
+        isLoading: false
+    };
   }
 
+  onPressHandler(){
+      this.setState({isLoading: true});
+      setTimeout(()=>{
+          this.setState({isLoading: false});
+      }, 1000);
+  }
   render() {
     
     return (
       <View style={Styles.screen.mainContainer} >
         <Image style={Styles.screen.header} source={Images.yin_timer_header} resizeMode="contain"/>
         <View style={Styles.card.container}>
-          {this.renderButtons()}
+          <Button
+            viewStyle={Styles.button.passive}
+            onPress={this.onPressHandler.bind(this)}
+            isLoading={this.state.isLoading} 
+          />
         </View>
       </View>
     )

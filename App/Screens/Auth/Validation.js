@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import * as actions from '../../Redux/Actions/auth_actions';
+import LoadingButton from '../../Components/LoadingButton';
 import Styles from '../../Themes/masterStyles';
 import Images from '../../Themes/images';
 
@@ -12,6 +13,7 @@ class ValidationScreen extends Component {
   constructor(){
     super()
     this.state = {
+        isLoading: false,
         code: '',
         phone: ''
     }
@@ -33,6 +35,7 @@ class ValidationScreen extends Component {
 
 
   async handleSubmit() {
+    this.setState({isLoading: true});
     const VERIFY_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/verifyPassword';
 
     try {
@@ -40,7 +43,8 @@ class ValidationScreen extends Component {
       
       this.props.login(data.token);
     } catch (error) {
-      alert('Invalid code. Please try agains')
+      alert('Invalid code. Please try agains');
+      this.setState({isLoading: false});
     }
   }
 
@@ -58,12 +62,11 @@ class ValidationScreen extends Component {
                 onChangeText={code => this.setState({ code })}
               />
             </View>
-            <Button
-              raised
-              style={{marginTop: 30}}
-              buttonStyle={Styles.button.auth}
-              textStyle={Styles.button.text}
+            <LoadingButton
+              viewStyle={[Styles.button.active, {margin: 10}]}
+              textStyle={Styles.button.text }
               title="Log In"
+              isLoading={this.state.isLoading}
               onPress={() => this.handleSubmit()} />
             <Button
               transparent
