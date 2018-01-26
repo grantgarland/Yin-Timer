@@ -27,6 +27,8 @@ class ValidationScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.jwt) {
+      AsyncStorage.setItem('start_date', new Date());
+      
       this.props.navigation.navigate('Home');
     }
   }

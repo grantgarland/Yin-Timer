@@ -39,6 +39,7 @@ const initializeFacebookLogin = async dispatch => {
     return dispatch({ type: FACEBOOK_LOGIN_FAIL });
   } else {
     await AsyncStorage.setItem('fb_token', token);
+    await AsyncStorage.setItem('start_date', new Date());
     dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
   }
 };

@@ -9,7 +9,7 @@ const masterStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.green
+      backgroundColor: Colors.transparent
     },
     buttonContainer: {
       flex: 1,
@@ -98,6 +98,56 @@ const masterStyles = {
       justifyContent: 'center', 
       flexDirection: 'column',
       alignItems: 'center',
+    }
+  },
+  home: {
+    container: {
+      flex: 1,
+      flexDirection: 'column'
+    },
+    halfHeight: {
+      flex: .5,
+      backgroundColor: Colors.green
+    },
+    quarterHeight: {
+      flex: .25,
+      backgroundColor: Colors.green
+    },
+    thirdHeight: {
+      flex: .334,
+      backgroundColor: Colors.green
+    },
+    fourthHeight: {
+      flex: .125,
+      backgroundColor: Colors.Green
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'center'
+    },
+    headerText: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      
+    },
+    headerImage: {
+      width: Dimensions.get('window').width / 2 - 10 ,
+      height: Dimensions.get('window').height / 10,
+      marginTop: Dimensions.get('window').height / 20,
+      resizeMode: 'cover',
+    },
+    card: {
+      backgroundColor: Colors.gong,
+      width: Dimensions.get('window').width / 3 - 10 ,
+      height: Dimensions.get('window').height / 2,
+    },
+    cardImage: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      resizeMode: 'contain',
     }
   }
 }
