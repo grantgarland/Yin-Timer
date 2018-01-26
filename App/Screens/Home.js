@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+
 import { Button, View, Text, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Card } from 'react-native-elements';
 import Moment from 'moment';
+
+import Button from '../Components/LoadingButton';
 
 import Styles from '../Themes/masterStyles';
 import Fonts from '../Themes/fonts';
 import Images from '../Themes/images'
 
 class HomeScreen extends Component {
+
   constructor() {
     super()
     today = Moment(new Date());
 
     this.state = {
+      isLoading: false,
       today: today.format('MMMM Do, YYYY'),
       use_period: '1',
     }
@@ -38,6 +43,12 @@ class HomeScreen extends Component {
     }
   }
 
+  onPressHandler(){
+      this.setState({isLoading: true});
+      setTimeout(()=>{
+          this.setState({isLoading: false});
+      }, 1000);
+  }
   render() {
     
     return (
@@ -72,6 +83,7 @@ class HomeScreen extends Component {
             />
             <Text style={Fonts.style.h5}>Build Custom Routine</Text>
           </Card>
+
         </View>
       </View>
     )

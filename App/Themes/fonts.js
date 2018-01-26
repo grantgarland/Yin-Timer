@@ -51,9 +51,17 @@ const style = {
     fontFamily: type.bold,
     fontSize: size.medium
   },
+  emphasis: {
+    fontFamily: type.bold,
+    fontSize: size.h6
+  },
   input: {
     fontFamily: type.base,
     fontSize: size.input
+  },
+  facebook: {
+    fontFamily: 'Helvetica',
+    fontSize: size.h6
   }
 }
 

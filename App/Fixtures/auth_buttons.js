@@ -2,19 +2,20 @@ import { Dimensions } from 'react-native';
 
 const auth_buttons = [
   {
-    text: 'Log In',
-    action: 'Log In',
-    height: Dimensions.get('window').height / 4
-  }, 
-  {
     text: 'Sign Up',
     action: 'Sign Up',
-    height: 30   
+    height: Dimensions.get('window').height / 4  
   },
   {
-    text: 'Sign Up with Facebook',
+    text: 'Log In',
+    action: 'Log In',
+    height: 30
+  },
+  {
+    text: 'Facebook Login',
     action: 'Facebook',
-    height: 30       
+    height: 30,
+    facebook: true   
   }
 ];
 

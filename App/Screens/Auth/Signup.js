@@ -6,6 +6,7 @@ import PhoneInput from 'react-native-phone-input';
 import axios from 'axios';
 
 import * as actions from '../../Redux/Actions/auth_actions';
+import LoadingButton from '../../Components/LoadingButton';
 import Styles from '../../Themes/masterStyles';
 import Images from '../../Themes/images';
 
@@ -13,6 +14,7 @@ class SignupScreen extends Component {
   constructor(){
     super()
     this.state = {
+        isLoading: false,
         valid: '',
         value: ''
     }
@@ -26,6 +28,7 @@ class SignupScreen extends Component {
   }
 
   async handleSubmit() {
+    this.setState({isLoading: true});
     const CREATE_USER_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/createUser';
     const SEND_CODE_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/requestPassword';
 
@@ -41,10 +44,12 @@ class SignupScreen extends Component {
 
         this.props.navigation.navigate('Validate');
       } catch (error) {
-        alert('User already exists. Please use log in screen.')
+        alert('User already exists. Please use log in screen.');
+        this.setState({isLoading: false});
       }
     } else {
       alert('Invalid phone number provided.');
+      this.setState({isLoading: false});
     }
   }
 
@@ -65,12 +70,11 @@ class SignupScreen extends Component {
                 onChangePhoneNumber={() => this.updateInfo()}
               />
             </View>
-            <Button
-              raised
-              style={{marginTop: 30}}
-              buttonStyle={Styles.button.auth}
-              textStyle={Styles.button.text}
+            <LoadingButton
+              viewStyle={[Styles.button.active, {margin: 10}]}
+              textStyle={Styles.button.text }
               title="Verify Number"
+              isLoading={this.state.isLoading}
               onPress={() => this.handleSubmit()} />
             <Button
               transparent
