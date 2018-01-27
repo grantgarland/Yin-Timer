@@ -73,13 +73,13 @@ const masterStyles = {
     },
     active: {
       width: Dimensions.get('window').width / 1.5,
-      height: 60,
+      height: 50,
       backgroundColor: Colors.green,
       borderRadius: 50
     },
     passive: {
       width: Dimensions.get('window').width / 1.5,
-      height: 60,
+      height: 50,
       backgroundColor: Colors.gong,
       borderRadius: 50
     },
@@ -120,6 +120,10 @@ const masterStyles = {
       flex: 1,
       flexDirection: 'column'
     },
+    twoThirdHeight: {
+      flex: .75,
+      backgroundColor: Colors.green
+    },
     halfHeight: {
       flex: .5,
       backgroundColor: Colors.green
@@ -156,13 +160,13 @@ const masterStyles = {
     card: {
       backgroundColor: Colors.gong,
       width: Dimensions.get('window').width / 3 - 10 ,
-      height: Dimensions.get('window').height / 2,
+      flex: 1,
+      alignItems: 'stretch'
     },
     cardImage: {
       flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'center',
-      resizeMode: 'contain',
+      alignItems: 'center'
     }
   }
 }

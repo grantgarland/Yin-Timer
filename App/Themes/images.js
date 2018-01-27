@@ -1,6 +1,7 @@
 const images = {
   auth_screen: require('./Images/auth_screen.png'),
   downward_facing_dog: require('./Images/downward_facing_dog.png'),
+  fish: require('./Images/Fish.png'),
   forward_lunge: require('./Images/forward_lunge.png'),
   half_saddle_fold: require('./Images/half_saddle_fold.png'),
   open_side_straddle: require('./Images/open_side_straddle.png'),
@@ -12,6 +13,7 @@ const images = {
   single_leg_forward_fold: require('./Images/single_leg_forward_fold.png'),
   single_leg_pull: require('./Images/single_leg_pull.png'),
   standing_forward_fold: require('./Images/standing_forward_fold.png'),
+  temple: require('./Images/Temple.png'),
   welcome_screen_1: require('./Images/welcome_screen_1.png'),
   welcome_screen_2: require('./Images/welcome_screen_2.png'),
   welcome_screen_3: require('./Images/welcome_screen_3.png'),

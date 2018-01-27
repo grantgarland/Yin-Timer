@@ -78,7 +78,7 @@ class SignupScreen extends Component {
               onPress={() => this.handleSubmit()} />
             <Button
               transparent
-              style={{marginTop: 30, marginLeft: -10}}
+              style={{marginLeft: -10}}
               textStyle={Styles.button.text}
               leftIcon={{name: 'navigate-before', color: 'black'}}
               title="Back"

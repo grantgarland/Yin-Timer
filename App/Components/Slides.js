@@ -9,7 +9,7 @@ import Colors from '../Themes/colors';
 class Slides extends Component {
   renderLastSlide(index) {
     if (index === this.props.data.length - 1) {
-      const button_margin = Dimensions.get('window').height - 150;
+      const button_margin = Dimensions.get('window').height - 120;
 
       return (
         <View style={[Styles.button.container, {marginTop: button_margin}]} >
