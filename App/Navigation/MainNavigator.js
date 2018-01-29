@@ -14,6 +14,8 @@ import HomeScreen from '../Screens/Home';
 import RoutineChooserScreen from '../Screens/RoutineChooser';
 import RoutineBuilderScreen from '../Screens/RoutineBuilder';
 import RoutineTimerScreen from '../Screens/RoutineTimer';
+import PoseViewerScreen from '../Screens/PoseViewer';
+import PoseBuilderScreen from '../Screens/PoseBuilder';
 import SettingsScreen from '../Screens/Settings';
 
 import Colors from '../Themes/colors';
@@ -61,27 +63,41 @@ const MainNavigator = StackNavigator({
     path: '/',
     navigationOptions: {
       header: null
-    },
+    }
   },
-  Chooser: {
+  RoutineChooser: {
     screen: RoutineChooserScreen,
-    path: '/routine/chooser',
+    path: '/routine/routine_chooser',
     navigationOptions: {
-      title: 'Choose a Routine'
-    },
+      title: 'Select Routine'
+    }
   },
-  Builder: {
+  RoutineBuilder: {
     screen: RoutineBuilderScreen,
-    path: '/routine/builder',
+    path: '/routine/routine_builder',
     navigationOptions: {
-      title: 'Build a Routine',
-    },
+      title: 'Build Routine',
+    }
   },
-  Timer: {
+  RoutineTimer: {
     screen: RoutineTimerScreen,
-    path: '/routine/timer',
+    path: '/routine/routine_timer',
     navigationOptions: {
-      title: 'Timer',
+      title: 'Routine Timer',
+    }
+  },
+  PoseViewer: {
+    screen: PoseViewerScreen,
+    path: '/routine/pose_viewer',
+    navigationOptions: {
+      title: 'Poses',
+    }
+  },
+  PoseBuilder: {
+    screen: PoseBuilderScreen,
+    path: '/routine/pose_builder',
+    navigationOptions: {
+      title: 'Add Pose',
     },
   }
 });
