@@ -70,9 +70,10 @@ export default class CardSwiper extends Component {
         showSecondCard={true}
         backgroundColor={Colors.green}
         onSwiped={this.onSwiped}
-        onTapCard={this.swipeLeft}
+        onTapCard={this.props.onTapCard}
         cards={this.props.cards}
         cardIndex={this.state.cardIndex}
+        cardStyle={this.props.cardStyle}
         cardVerticalMargin={margin}
         cardHorizontalMargin={margin}
         renderCard={this.props.renderCard}
