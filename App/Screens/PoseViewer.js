@@ -7,6 +7,7 @@ import {
   Animated,
   Dimensions
 } from 'react-native'
+import { Rating } from 'react-native-elements';
 
 import Swiper from '../Components/CardSwiper';
 import poses from '../Fixtures/poses';
@@ -80,9 +81,36 @@ export default class PoseViewer extends Component {
           </View>
         </Animated.View>
         <Animated.View style={[styles.card, backFlipStyle]}>
-          <Text style={styles.flipText}>
-            This text is flipping on the back.
-          </Text>
+          <View style={styles.cardHeader}>
+            <Text style={[Fonts.style.h3, {textAlign: 'center'}]}>
+              {card.name}
+            </Text>
+          </View>
+          <View style={styles.cardDetail}>
+            <Text style={[Fonts.style.h5, {textAlign: 'center'}]}>Difficulty</Text>
+            <Rating
+              type="star"
+              ratingCount={3}
+              startingValue={3}
+              readonly
+              imageSize={25}
+              ratingColor={Colors.gong}
+              style={{ paddingVertical: 10, alignItems: 'center' }}
+            />
+            <Text style={[Fonts.style.h5, {textAlign: 'center'}]}>Duration</Text>
+            <Rating
+              type="bell"
+              ratingCount={5}
+              startingValue={2}
+              readonly
+              imageSize={25}
+              ratingColor={Colors.gong}
+              style={{ paddingVertical: 10 }}
+            />
+          </View>
+          <View style={styles.cardTargets}>
+            
+          </View>
         </Animated.View>
       </View>
     )
@@ -115,6 +143,19 @@ const styles = StyleSheet.create({
   cardContainer: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center'
+  },
+  cardHeader: {
+    flex: .2,
+    justifyContent: 'center'
+  },
+  cardDetail: {
+    flex: .4,
+    flexDirection: 'column',
+    // justifyContent: 'space-around',
+  },
+  cardTargets: {
+    flex: .4,
+    justifyContent: 'center'
   },
   card: {
     flex: 1,
