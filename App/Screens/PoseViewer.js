@@ -5,9 +5,10 @@ import {
   View,
   Image,
   Animated,
-  Dimensions
+  Dimensions,
+  FlatList
 } from 'react-native'
-import { Rating } from 'react-native-elements';
+import { Rating, List, ListItem } from 'react-native-elements';
 
 import Swiper from '../Components/CardSwiper';
 import poses from '../Fixtures/poses';
@@ -71,61 +72,79 @@ export default class PoseViewer extends Component {
       ]
     }
 
+    capitalize = (word) => {
+      word = word.split(" ");
+
+      for (let i = 0, x = word.length; i < x; i++) {
+          word[i] = word[i][0].toUpperCase() + word[i].substr(1);
+      }
+
+      return word.join(" ");
+    }
+
     return (
-      <View style={styles.cardContainer}>
+      <Animated.View style={styles.cardContainer}>
         <Animated.View style={[styles.card, frontFlipStyle]}>
           <Image style={styles.image} source={card.image} />
-          <View style={styles.textContainer}>
+          <Animated.View style={styles.textContainer}>
             <Text style={[Fonts.style.h3, {textAlign: 'center'}]}>{card.name}</Text>
             <Text style={[Fonts.style.description, {textAlign: 'center', paddingBottom: 10}]}>Tap for details</Text>
-          </View>
+          </Animated.View>
         </Animated.View>
         <Animated.View style={[styles.card, backFlipStyle]}>
-          <View style={styles.cardHeader}>
-            <Text style={[Fonts.style.h3, {textAlign: 'center'}]}>
-              {card.name}
-            </Text>
-          </View>
-          <View style={styles.cardDetail}>
+          <Animated.View style={styles.cardDetail}>
             <Text style={[Fonts.style.h5, {textAlign: 'center'}]}>Difficulty</Text>
             <Rating
               type="star"
               ratingCount={3}
-              startingValue={3}
+              startingValue={card.difficulty}
               readonly
-              imageSize={25}
+              imageSize={20}
               ratingColor={Colors.gong}
               style={{ paddingVertical: 10, alignItems: 'center' }}
             />
             <Text style={[Fonts.style.h5, {textAlign: 'center'}]}>Duration</Text>
+            <Text style={[Fonts.size.small, {textAlign: 'center'}]}>(minutes)</Text>
             <Rating
               type="bell"
               ratingCount={5}
-              startingValue={2}
+              startingValue={card.duration}
               readonly
-              imageSize={25}
+              imageSize={20}
               ratingColor={Colors.gong}
               style={{ paddingVertical: 10 }}
             />
-          </View>
-          <View style={styles.cardTargets}>
-            
-          </View>
+          </Animated.View>
+          <Animated.View style={styles.cardTargets}>
+            <Text style={[Fonts.style.h5, {textAlign: 'center'}]}>Target Areas</Text>
+            <List containerStyle={{marginBottom: 20}}>
+              {
+                card.targets.map((target, i) => (
+                  <ListItem
+                    key={i}
+                    title={capitalize(target.area)}
+                    hideChevron={true}
+                    containerStyle={{justifyContent: 'center'}}
+                  />
+                ))
+              }
+            </List>
+          </Animated.View>
         </Animated.View>
-      </View>
+      </Animated.View>
     )
   };
 
   render () {
     return (
-      <View style={styles.container}>
+      <Animated.View style={styles.container}>
         <Swiper
           cards={this.state.cards}
           renderCard={this.renderCard}
           onTapCard={this.flipCard}
         >
         </Swiper>
-      </View>
+      </Animated.View>
     )
   }
 }
@@ -144,18 +163,17 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center'
   },
-  cardHeader: {
-    flex: .2,
-    justifyContent: 'center'
-  },
   cardDetail: {
     flex: .4,
     flexDirection: 'column',
-    // justifyContent: 'space-around',
+    justifyContent: 'space-around',
+    marginTop: 10
   },
   cardTargets: {
-    flex: .4,
-    justifyContent: 'center'
+    flexDirection: 'column',
+    flex: .6,
+    justifyContent: 'center',
+    width: Dimensions.get('window').width - 200
   },
   card: {
     flex: 1,
