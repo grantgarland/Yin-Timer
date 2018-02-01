@@ -26,14 +26,6 @@ const poses = [
     two_sided: true
   },
   {
-    name: 'Open Side Straddle',
-    targets: [{area: 'groin'}, {area: 'lower back'}, {area: 'hamstrings'}],
-    duration: 2,
-    difficulty: 3,
-    image: images.open_side_straddle,
-    two_sided: true
-  },
-  {
     name: 'Saddle',
     targets: [{area: 'quads'}, {area: 'ankes'}],
     duration: 4,
@@ -59,7 +51,7 @@ const poses = [
   },
   {
     name: 'Seated Side Straddle',
-    targets: [{area: 'groin'}, {area: 'lower back'}, {area: 'upper back'}],
+    targets: [{area: 'groin'}, {area: 'hips'}, {area: 'upper back'}],
     duration: 2,
     difficulty: 3,
     image: images.open_side_straddle,
