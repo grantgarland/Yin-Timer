@@ -46,11 +46,12 @@ class SignupScreen extends Component {
           this.setState({isLoading: false});
         }
       } else {
-        alert('User not found. Please try signing up.');
+        alert("We're having trouble finding that user. Please try signing up.");
         this.setState({isLoading: false});
+        this.props.navigation.navigate('Signup');
       }
     } else {
-      alert('Invalid nuimber provided.');
+      alert('Invalid number provided.');
       this.setState({isLoading: false});
     }
   }

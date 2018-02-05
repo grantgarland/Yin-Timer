@@ -74,7 +74,7 @@ LoadingButton.defaultProps = {
   },
   title: 'button',
   isLoading: false,
-  activityIndicatorColor: '#FFF',
+  activityIndicatorColor: Colors.gong,
   activityIndicatorSize: 'large',
   viewStyle: {
       width: Dimensions.get('window').width / 2,
@@ -98,6 +98,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
   },
   defaultLoadingText: {
-      color: '#FFF'
+      color: Colors.gong
   }
 });

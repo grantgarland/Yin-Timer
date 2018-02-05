@@ -7,7 +7,7 @@ import {
   Animated,
   Dimensions
 } from 'react-native'
-import { Card, Rating, List, ListItem } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 
 import Swiper from '../Components/CardSwiper';
 import poses from '../Fixtures/poses';
@@ -22,23 +22,6 @@ export default class PoseViewer extends Component {
     this.state = {
       cards: poses
     }
-  }
-
-  flipCard = () => {
-    if (this.value >= 90) {
-      Animated.spring(this.animatedValue,{
-        toValue: 0,
-        friction: 10,
-        tension: 8
-      }).start();
-    } else {
-      Animated.spring(this.animatedValue,{
-        toValue: 180,
-        friction: 10,
-        tension: 8
-      }).start();
-    }
-
   }
 
   renderCard = card => {
@@ -57,16 +40,30 @@ export default class PoseViewer extends Component {
       <Animated.View style={styles.cardContainer}>
         <Card
           featuredTitle={card.name}
-          featuredTitleStyle={{fontFamily: Fonts.style.bold}}
+          featuredTitleStyle={Fonts.style.emphasis}
           image={card.image}
           imageStyle={styles.image}
-          style={styles.card}
+          imageWrapperStyle={{height: 350}}
           fontFamily={Fonts.type.bold}
-          >
-          <Text style={{marginBottom: 10, textAlign: 'center'}}>
-            A resting pose that opens up the chest and shoulders while elongating the calves and hamstrings.
-          </Text>
-          <Text style={[Fonts.style.h5, {textAlign: 'center'}]}>Difficulty</Text>
+          containerStyle={{borderRadius: 10, flex: .75, overflow: 'hidden'}}
+        >
+          <View style={styles.textContainer} >
+            <Text style={styles.headerText}>
+              Difficulty
+            </Text>
+            <Text style={styles.headerText}>Duration</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={Fonts.style.h5}>{card.difficulty}/3</Text>
+            <Text style={Fonts.style.h5}>{card.duration} min</Text>
+          </View>
+
+          <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}} >
+          <Text style={[styles.headerText, {paddingBottom: 10}]}>Target Areas</Text>
+            { card.targets.map((target, i) => (
+              <Text key={i} style={[Fonts.style.description, {paddingTop: 5}]}>{capitalize(target.area)}</Text>
+            ))}
+          </View>
         </Card>
       </Animated.View>
     )
@@ -90,39 +87,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.green
   },
-  textContainer: {
-    flex: .4,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-  },
   cardContainer: {
     ...StyleSheet.absoluteFillObject,
-    alignItems: 'center'
-  },
-  cardDetail: {
-    flex: .4,
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    marginTop: 10
-  },
-  cardTargets: {
-    flexDirection: 'column',
-    flex: .6,
-    justifyContent: 'center',
-    width: Dimensions.get('window').width - 200
-  },
-  card: {
-    flex: 1,
-    alignItems: "center", 
-    borderRadius: 4,
-    width: Dimensions.get('window').width - 50,
-    height: Dimensions.get('window').height - 200,
-    backgroundColor: "white",
-    padding: 5
   },
   image: {
     width: '100%',
     height: "60%",
     alignSelf: 'center'
   },
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingBottom: 10,
+  },
+  headerText: {
+    ...Fonts.style.emphasis,
+    color: Colors.gong,
+    paddingTop: 15
+  }
 })

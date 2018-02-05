@@ -44,8 +44,9 @@ class SignupScreen extends Component {
 
         this.props.navigation.navigate('Validate');
       } catch (error) {
-        alert('User already exists. Please use log in screen.');
+        alert("We encountered an error. Please try again.");
         this.setState({isLoading: false});
+        this.props.navigation.navigate('Login');
       }
     } else {
       alert('Invalid phone number provided.');
