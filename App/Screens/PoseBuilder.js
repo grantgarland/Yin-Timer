@@ -1,12 +1,16 @@
 import React, {Component} from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { Card, FormLabel, FormInput } from 'react-native-elements'
 import Slider from "react-native-slider";
-import CustomMultiPicker from "react-native-multiple-select-list";
+import MultiSelect from 'react-native-multiple-select';
+
+import LoadingButton from '../Components/LoadingButton';
 
 import Styles from '../Themes/masterStyles';
 import Fonts from '../Themes/fonts';
 import Colors from '../Themes/colors';
+
+import TARGETS from '../Fixtures/targets';
 export default class PoseBuilder extends Component {
   constructor (props) {
     super(props)
@@ -14,7 +18,8 @@ export default class PoseBuilder extends Component {
       name: '',
       duration: 1,
       difficulty: 1,
-      targets: []
+      targets: [],
+      selectedTargets: []
     }
   }
 
@@ -31,38 +36,54 @@ export default class PoseBuilder extends Component {
     }
   }
 
-  onSelectTarget = (targets) => {
+  onSelectedItemsChange = selectedItems => {
+    const targets = [];
+
+    selectedItems.forEach((selectedId) => {
+      TARGETS.filter((target) => {
+        target.id == selectedId ? targets.push(target.name) : null;
+      });
+    });
+
+    this.setState({ selectedTargets: selectedItems });
     this.setState({ targets });
-    alert(this.state.targets)
   };
 
-  render () {
-    const { targets } = this.state;
-    const target_areas = ['Abdominals', 'Ankles', 'Calves', 'Hamstrings', 'Hips', 'Lower Back',  'Upper Back',  'Shoulders', 'Quads' ];
+  savePose = () => {
+  }
 
+  render () {
     return (
       <View style={styles.container}>
         <View style={styles.cardContainer}>
           <Card
             fontFamily={Fonts.type.bold}
-            containerStyle={{borderRadius: 10, flex: .90, overflow: 'hidden', }}
+            containerStyle={{borderRadius: 10, flex: .98, overflow: 'hidden', }}
           >
-            <Text style={styles.headerText}>Add Custom Pose</Text>
             <FormLabel>Name</FormLabel>
             <FormInput onChangeText={(name) => {this.setState({ name })}}/>
             
-            <FormLabel>Default Duration: {this.state.duration} minutes</FormLabel>
-            <View style={styles.sliderContainer}>
-              <Slider
-                value={this.state.duration}
-                minimumValue={1}
-                maximumValue={10}
-                step={1}
-                minimumTrackTintColor={Colors.gong}
-                thumbTintColor={Colors.gong}
-                onValueChange={duration => this.setState({ duration })}
+            <FormLabel>Target Areas</FormLabel>
+            <View style={styles.targetsContainer}>
+              <MultiSelect
+                hideTags
+                items={TARGETS}
+                uniqueKey="id"
+                displayKey="name"
+                hideSubmitButton={true}
+                ref={(component) => { this.multiSelect = component }}
+                onSelectedItemsChange={this.onSelectedItemsChange}
+                selectedItems={this.state.selectedTargets}
+                selectText="Select"
+                searchInputPlaceholderText="..."
+                onChangeInput={ (text)=> console.log(text)}
+                fontFamily={Fonts.type.base}
+                selectedItemTextColor={Colors.gong}
+                selectedItemIconColor={Colors.gong}
+                itemTextColor={Colors.charcoal}
+                searchInputStyle={{ color: '#CCC' }}
               />
-            </View>
+           </View>
 
             <FormLabel>Difficulty: {this.difficultyText()}</FormLabel>
             <View style={styles.sliderContainer}>
@@ -72,31 +93,34 @@ export default class PoseBuilder extends Component {
                 maximumValue={3}
                 step={1}
                 minimumTrackTintColor={Colors.gong}
+                maximumTrackTintColor={Colors.windowTint}
                 thumbTintColor={Colors.gong}
                 onValueChange={difficulty => this.setState({ difficulty })}
               />
             </View>
 
-            <FormLabel>Target Areas</FormLabel>
-            <View style={styles.targetsContainer}>
-              <CustomMultiPicker
-                options={target_areas}
-                multiple={true}
-                placeholder={"Select Targets"}
-                placeholderTextColor={'#757575'}
-                returnValue={"label"}
-                callback={(target) => { this.onSelectTarget(target) }}
-                rowBackgroundColor={"#eee"}
-                scrollViewHeight={9}
-                rowHeight={40}
-                rowRadius={5}
-                iconColor={Colors.gong}
-                iconSize={30}
-                selectedIconName={"ios-checkmark-circle-outline"}
-                unselectedIconName={"ios-radio-button-off-outline"}
-                scrollViewHeight={120}
+            <FormLabel>Default Duration: {this.state.duration} minutes</FormLabel>
+            <View style={styles.sliderContainer}>
+              <Slider
+                value={this.state.duration}
+                minimumValue={1}
+                maximumValue={10}
+                step={1}
+                minimumTrackTintColor={Colors.gong}
+                maximumTrackTintColor={Colors.windowTint}
+                thumbTintColor={Colors.gong}
+                onValueChange={duration => this.setState({ duration })}
               />
-           </View>
+            </View>
+
+           <View style={styles.buttonContainer}>
+            <LoadingButton
+              viewStyle={[Styles.button.small, {margin: 5, marginTop: 15}]}
+              textStyle={Styles.button.text}
+              title="Save"
+              isLoading={false}
+              onPress={() => this.savePose()} />
+            </View>
           </Card>
         </View>
       </View>
@@ -112,7 +136,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'column',
-    padding: 15
+    padding: 5
   },
   headerText: {
     ...Fonts.style.emphasis,
@@ -130,6 +154,12 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   targetsContainer: {
-    paddingTop: 10
+    paddingTop: 10,
+    marginLeft: 20,
+    marginRight: 20
   },
+  buttonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  }
 })

@@ -1,6 +1,6 @@
 import Images from '../Themes/images';
 
-const SLIDE_DATA = [
+const slide_data = [
   { 
     index: 1,
     image: Images.welcome_screen_1
@@ -15,4 +15,4 @@ const SLIDE_DATA = [
   },
 ]
 
-export default SLIDE_DATA;
+export default slide_data;

@@ -83,6 +83,12 @@ const masterStyles = {
       backgroundColor: Colors.gong,
       borderRadius: 50
     },
+    small: {
+      width: Dimensions.get('window').width / 2,
+      height: 35,
+      backgroundColor: Colors.green,
+      borderRadius: 50
+    },
     facebook: {
       width: Dimensions.get('window').width / 1.5,
       height: 60,

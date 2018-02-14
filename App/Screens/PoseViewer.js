@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: "60%",
+    height: "50%",
     alignSelf: 'center'
   },
   textContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingBottom: 10,
+
   },
   headerText: {
     ...Fonts.style.emphasis,
