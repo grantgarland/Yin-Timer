@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Card, FormLabel, FormInput } from 'react-native-elements'
+import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
 import Slider from "react-native-slider";
 import MultiSelect from 'react-native-multiple-select';
 
@@ -22,6 +22,16 @@ export default class PoseBuilder extends Component {
       selectedTargets: []
     }
   }
+
+  static navigationOptions = {
+    headerRight: (
+      <Button
+        transparent
+        title={"Save"}
+        textStyle={Styles.button.text}
+        onPress={() => alert('Saving')} />
+    )
+  };
 
   difficultyText = () => {
     switch (this.state.difficulty) {

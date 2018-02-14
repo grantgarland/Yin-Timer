@@ -2,7 +2,6 @@ import React from 'react';
 import { StackNavigator, TabNavigator, Header } from 'react-navigation';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Button } from 'react-native-elements';
 
 import WelcomeScreen from '../Screens/Welcome';
 import AuthScreen from '../Screens/Auth/Auth';
@@ -76,7 +75,7 @@ const MainNavigator = StackNavigator({
     screen: RoutineBuilderScreen,
     path: '/routine/routine_builder',
     navigationOptions: {
-      title: 'Build Routine',
+      title: 'Build Routine'
     }
   },
   RoutineTimer: {
@@ -97,7 +96,7 @@ const MainNavigator = StackNavigator({
     screen: PoseBuilderScreen,
     path: '/routine/pose_builder',
     navigationOptions: {
-      title: 'Add Pose',
+      title: 'Add Pose'
     },
   }
 });
