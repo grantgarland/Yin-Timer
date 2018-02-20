@@ -2,6 +2,7 @@ import React from 'react';
 import { StackNavigator, TabNavigator, Header } from 'react-navigation';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Button } from 'react-native-elements'
 
 import WelcomeScreen from '../Screens/Welcome';
 import AuthScreen from '../Screens/Auth/Auth';
@@ -18,6 +19,7 @@ import PoseBuilderScreen from '../Screens/PoseBuilder';
 import SettingsScreen from '../Screens/Settings';
 
 import Colors from '../Themes/colors';
+import Fonts from '../Themes/fonts';
 
 const AuthPath = StackNavigator({
   Auth: {
@@ -67,37 +69,72 @@ const MainNavigator = StackNavigator({
   RoutineChooser: {
     screen: RoutineChooserScreen,
     path: '/routine/routine_chooser',
-    navigationOptions: {
-      title: 'Select Routine'
-    }
+    navigationOptions: ({navigation}) =>({
+      title: 'Select Routine',
+      headerTitleStyle: {fontFamily: Fonts.type.bold},
+      headerLeft: (
+        <Button
+          transparent
+          leftIcon={{name: 'arrow-back', color: Colors.gong, size: 30}} 
+          onPress={ () => { navigation.goBack() }} />
+      ),
+    }),
   },
   RoutineBuilder: {
     screen: RoutineBuilderScreen,
     path: '/routine/routine_builder',
-    navigationOptions: {
-      title: 'Build Routine'
-    }
+    navigationOptions: ({navigation}) =>({
+      title: 'Build Routine',
+      headerTitleStyle: {fontFamily: Fonts.type.bold},
+      headerLeft: (
+        <Button
+          transparent
+          leftIcon={{name: 'arrow-back', color: Colors.gong, size: 30}} 
+          onPress={ () => { navigation.goBack() }} />
+      ),
+    })
   },
   RoutineTimer: {
     screen: RoutineTimerScreen,
     path: '/routine/routine_timer',
-    navigationOptions: {
+    navigationOptions: ({navigation}) =>({
       title: 'Routine Timer',
-    }
+      headerTitleStyle: {fontFamily: Fonts.type.bold},
+      headerLeft: (
+        <Button
+          transparent
+          leftIcon={{name: 'arrow-back', color: Colors.gong, size: 30}} 
+          onPress={ () => { navigation.goBack() }} />
+      ),
+    })
   },
   PoseViewer: {
     screen: PoseViewerScreen,
     path: '/routine/pose_viewer',
-    navigationOptions: {
+    navigationOptions: ({navigation}) =>({
       title: 'Poses',
-    }
+      headerTitleStyle: {fontFamily: Fonts.type.bold},
+      headerLeft: (
+        <Button
+          transparent
+          leftIcon={{name: 'arrow-back', color: Colors.gong, size: 30}} 
+          onPress={ () => { navigation.goBack() }} />
+      ),
+    })
   },
   PoseBuilder: {
     screen: PoseBuilderScreen,
     path: '/routine/pose_builder',
-    navigationOptions: {
-      title: 'Add Pose'
-    },
+    navigationOptions: ({navigation}) =>({
+      title: 'Add Pose',
+      headerTitleStyle: {fontFamily: Fonts.type.bold},
+      headerLeft: (
+        <Button
+          transparent
+          leftIcon={{name: 'arrow-back', color: Colors.gong, size: 30}} 
+          onPress={ () => { navigation.goBack() }} />
+      ),
+    }),
   }
 });
 

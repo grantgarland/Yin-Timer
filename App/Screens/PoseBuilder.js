@@ -3,17 +3,17 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
 import Slider from "react-native-slider";
 import MultiSelect from 'react-native-multiple-select';
-
-import LoadingButton from '../Components/LoadingButton';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Styles from '../Themes/masterStyles';
 import Fonts from '../Themes/fonts';
 import Colors from '../Themes/colors';
 
 import TARGETS from '../Fixtures/targets';
+
 export default class PoseBuilder extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       name: '',
       duration: 1,
@@ -23,15 +23,25 @@ export default class PoseBuilder extends Component {
     }
   }
 
-  static navigationOptions = {
-    headerRight: (
-      <Button
-        transparent
-        title={"Save"}
-        textStyle={Styles.button.text}
-        onPress={() => alert('Saving')} />
-    )
+  static navigationOptions = ({navigation}) => {
+    const { params = {} } = navigation.state;
+    return {
+      headerRight: (
+        <Button
+          transparent
+          rightIcon={{name: 'add', color: Colors.gong, size: 30}}
+          onPress={() => params.handleSave() } />
+      )
+    }
   };
+
+  componentDidMount() {
+    this.props.navigation.setParams({ handleSave: this.savePose });
+  }
+
+  savePose() {
+    alert('Saving')
+  }
 
   difficultyText = () => {
     switch (this.state.difficulty) {
@@ -59,19 +69,18 @@ export default class PoseBuilder extends Component {
     this.setState({ targets });
   };
 
-  savePose = () => {
-  }
-
   render () {
     return (
       <View style={styles.container}>
         <View style={styles.cardContainer}>
           <Card
             fontFamily={Fonts.type.bold}
-            containerStyle={{borderRadius: 10, flex: .98, overflow: 'hidden', }}
+            containerStyle={{borderRadius: 10, flex: .95, overflow: 'hidden', }}
           >
             <FormLabel>Name</FormLabel>
-            <FormInput onChangeText={(name) => {this.setState({ name })}}/>
+            <FormInput 
+              inputStyle={{color: Colors.charcoal, fontFamily: Fonts.type.base}}
+              onChangeText={(name) => {this.setState({ name })}}/>
             
             <FormLabel>Target Areas</FormLabel>
             <View style={styles.targetsContainer}>
@@ -109,7 +118,7 @@ export default class PoseBuilder extends Component {
               />
             </View>
 
-            <FormLabel>Default Duration: {this.state.duration} minutes</FormLabel>
+            <FormLabel>Hold Duration: {this.state.duration > 1 ? this.state.duration + ' minutes' : '1 minute'}</FormLabel>
             <View style={styles.sliderContainer}>
               <Slider
                 value={this.state.duration}
@@ -121,15 +130,6 @@ export default class PoseBuilder extends Component {
                 thumbTintColor={Colors.gong}
                 onValueChange={duration => this.setState({ duration })}
               />
-            </View>
-
-           <View style={styles.buttonContainer}>
-            <LoadingButton
-              viewStyle={[Styles.button.small, {margin: 5, marginTop: 15}]}
-              textStyle={Styles.button.text}
-              title="Save"
-              isLoading={false}
-              onPress={() => this.savePose()} />
             </View>
           </Card>
         </View>
@@ -146,7 +146,8 @@ const styles = StyleSheet.create({
   cardContainer: {
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'column',
-    padding: 5
+    padding: 10,
+    marginTop: 10
   },
   headerText: {
     ...Fonts.style.emphasis,
