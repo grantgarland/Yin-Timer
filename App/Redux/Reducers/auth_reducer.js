@@ -9,7 +9,7 @@ export default function(state = {}, action) {
   switch(action.type) {
     case LOGIN_SUCCESS:
       return { jwt: action.payload };
-      case LOGIN_FAIL:
+    case LOGIN_FAIL:
       return { jwt: null };
     case FACEBOOK_LOGIN_SUCCESS:
       return { token: action.payload };

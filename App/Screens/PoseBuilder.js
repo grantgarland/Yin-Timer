@@ -1,26 +1,30 @@
 import React, {Component} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { connect } from 'react-redux';
 import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
 import Slider from "react-native-slider";
 import MultiSelect from 'react-native-multiple-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import * as actions from '../Redux/Actions/pose_actions';
 import Styles from '../Themes/masterStyles';
 import Fonts from '../Themes/fonts';
 import Colors from '../Themes/colors';
 
 import TARGETS from '../Fixtures/targets';
 
-export default class PoseBuilder extends Component {
+class PoseBuilder extends Component {
   constructor () {
     super()
     this.state = {
+      isSaving: false,
       name: '',
       duration: 1,
       difficulty: 1,
       targets: [],
       selectedTargets: []
-    }
+    },
+    this.error = ''
   }
 
   static navigationOptions = ({navigation}) => {
@@ -39,8 +43,31 @@ export default class PoseBuilder extends Component {
     this.props.navigation.setParams({ handleSave: this.savePose });
   }
 
-  savePose() {
-    alert('Saving')
+  savePose = () => {
+    this.setState({isSaving: true});
+
+    const pose = {
+      name: this.state.name,
+      duration: this.state.duration,
+      difficulty: this.state.difficulty,
+      targets: this.state.targets
+    }
+
+    if (this.isValid(pose)) {
+      console.log('valid pose')
+    } else {
+      alert(this.error)
+    }
+  }
+
+  isValid = (pose) => {
+    if (this.state.name.length > 1) {
+      this.error = 'Please provide a pose name';
+      return false
+    } else if ( this.state.targets.length < 1 || this.state.targets.length > 3) {
+      this.error = 'Please select between 1 and 3 target areas';
+      return false
+    }
   }
 
   difficultyText = () => {
@@ -137,6 +164,12 @@ export default class PoseBuilder extends Component {
     )
   }
 }
+
+function mapStateToProps({ pose }) {
+  return { poses: pose.custom_poses };
+}
+
+export default connect(null, actions)(PoseBuilder)
 
 const styles = StyleSheet.create({
   container: {
