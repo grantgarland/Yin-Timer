@@ -23,8 +23,7 @@ class PoseBuilder extends Component {
       difficulty: 1,
       targets: [],
       selectedTargets: []
-    },
-    this.error = ''
+    }
   }
 
   static navigationOptions = ({navigation}) => {
@@ -55,18 +54,18 @@ class PoseBuilder extends Component {
 
     if (this.isValid(pose)) {
       console.log('valid pose')
-    } else {
-      alert(this.error)
     }
   }
 
   isValid = (pose) => {
-    if (this.state.name.length > 1) {
-      this.error = 'Please provide a pose name';
+    if (!this.state.name) {
+      alert('Please provide a pose name');
       return false
     } else if ( this.state.targets.length < 1 || this.state.targets.length > 3) {
-      this.error = 'Please select between 1 and 3 target areas';
+      alert('Please select between 1 and 3 target areas');
       return false
+    } else {
+      return true
     }
   }
 
