@@ -16,7 +16,7 @@ import Styles from '../Themes/masterStyles';
 import Fonts from '../Themes/fonts';
 import Colors from '../Themes/colors';
 
-export default class PoseViewer extends Component {
+export default class PoseViewerScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {

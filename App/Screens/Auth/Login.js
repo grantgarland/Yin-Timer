@@ -10,7 +10,7 @@ import LoadingButton from '../../Components/LoadingButton';
 import Styles from '../../Themes/masterStyles';
 import Images from '../../Themes/images';
 
-class SignupScreen extends Component {
+class LoginScreen extends Component {
   constructor(){
     super()
     this.state = {
@@ -93,4 +93,4 @@ class SignupScreen extends Component {
   }
 }
 
-export default connect(null, actions)(SignupScreen);
+export default connect(null, actions)(LoginScreen);

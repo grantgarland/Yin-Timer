@@ -13,7 +13,7 @@ import Colors from '../Themes/colors';
 
 import TARGETS from '../Fixtures/targets';
 
-class PoseBuilder extends Component {
+class PoseBuilderScreen extends Component {
   constructor () {
     super()
     this.state = {
@@ -53,7 +53,7 @@ class PoseBuilder extends Component {
     }
 
     if (this.isValid(pose)) {
-      console.log('valid pose')
+      console.log(pose)
     }
   }
 
@@ -168,7 +168,7 @@ function mapStateToProps({ pose }) {
   return { poses: pose.custom_poses };
 }
 
-export default connect(null, actions)(PoseBuilder)
+export default connect(null, actions)(PoseBuilderScreen)
 
 const styles = StyleSheet.create({
   container: {
