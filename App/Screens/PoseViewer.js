@@ -43,7 +43,7 @@ export default class PoseViewerScreen extends Component {
           featuredTitleStyle={Fonts.style.emphasis}
           image={card.image}
           imageStyle={styles.image}
-          imageWrapperStyle={{height: 350}}
+          imageWrapperStyle={{height: Dimensions.get('window').height / 1.6}}
           fontFamily={Fonts.type.bold}
           containerStyle={{borderRadius: 10, flex: .75, overflow: 'hidden'}}
         >

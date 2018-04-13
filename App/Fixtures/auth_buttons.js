@@ -11,12 +11,13 @@ const auth_buttons = [
     action: 'Log In',
     height: 30
   },
-  {
-    text: 'Facebook Login',
-    action: 'Facebook',
-    height: 30,
-    facebook: true   
-  }
+  // Not sure how I feel about Facebook anymore
+  // {
+  //   text: 'Facebook Login',
+  //   action: 'Facebook',
+  //   height: 30,
+  //   facebook: true   
+  // }
 ];
 
 export default auth_buttons;

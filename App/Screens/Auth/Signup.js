@@ -28,10 +28,11 @@ class SignupScreen extends Component {
   }
 
   async handleSubmit() {
-    this.setState({isLoading: true});
     const CREATE_USER_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/createUser';
     const SEND_CODE_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/requestPassword';
 
+    this.setState({isLoading: true});
+    
     if (this.state.value && this.state.valid) {
       try {
         let phone = this.state.value.toString();

@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
 import Slider from "react-native-slider";
 import MultiSelect from 'react-native-multiple-select';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
 
 import * as actions from '../Redux/Actions/pose_actions';
 import Styles from '../Themes/masterStyles';
@@ -17,6 +19,7 @@ class PoseBuilderScreen extends Component {
   constructor () {
     super()
     this.state = {
+      userToken: '',
       isSaving: false,
       name: '',
       duration: 1,
@@ -39,12 +42,18 @@ class PoseBuilderScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ handleSave: this.savePose });
+    this.props.navigation.setParams({handleSave: this.savePose });
+    this.getUserToken().then(res => this.setState({userToken: res}));
+  }
+
+  async getUserToken() {
+    let token = await AsyncStorage.getItem('phone');
+
+    return token.substr(1);
   }
 
   savePose = () => {
-    this.setState({isSaving: true});
-
+    const CREATE_POSE_URL='https://us-central1-yin-timer-2.cloudfunctions.net/createPose';
     const pose = {
       name: this.state.name,
       duration: this.state.duration,
@@ -52,9 +61,29 @@ class PoseBuilderScreen extends Component {
       targets: this.state.targets
     }
 
+    this.setState({isSaving: true});
+
     if (this.isValid(pose)) {
-      console.log(pose)
+      try {
+        this.deployCloudFunction(CREATE_POSE_URL, this.state.userToken, pose)
+        .then(res => {
+          if (res.status === 200) {
+            this.props.navigation.navigate('Home');
+          } else {
+            alert("Error connection to the network. Please try again.")
+          }
+        })
+      } catch(error) {
+        alert("We encountered an error. Please try again.")
+        this.setState({isLoading: false});
+      }
+    } else {
+      this.setState({isLoading: false});
     }
+  }
+
+  async deployCloudFunction(url, token, pose) {
+    return await axios.post(url, { token, pose }); 
   }
 
   isValid = (pose) => {
@@ -106,7 +135,7 @@ class PoseBuilderScreen extends Component {
             <FormLabel>Name</FormLabel>
             <FormInput 
               inputStyle={{color: Colors.charcoal, fontFamily: Fonts.type.base}}
-              onChangeText={(name) => {this.setState({ name })}}/>
+              onChangeText={name => this.setState({ name })}/>
             
             <FormLabel>Target Areas</FormLabel>
             <View style={styles.targetsContainer}>
@@ -165,10 +194,12 @@ class PoseBuilderScreen extends Component {
 }
 
 function mapStateToProps({ pose }) {
-  return { poses: pose.custom_poses };
+  return {
+    poses: pose.custom_poses
+  };
 }
 
-export default connect(null, actions)(PoseBuilderScreen)
+export default connect(mapStateToProps, actions)(PoseBuilderScreen)
 
 const styles = StyleSheet.create({
   container: {

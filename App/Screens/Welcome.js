@@ -35,6 +35,9 @@ class WelcomeScreen extends Component {
 }
 
 function mapStateToProps({ auth }) {
-  return { token: auth.token };
+  return { 
+    token: auth.token,
+    jwt: auth.jwt
+  };
 }
 export default connect(mapStateToProps, actions)(WelcomeScreen);

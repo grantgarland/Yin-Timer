@@ -33,22 +33,15 @@ class LoginScreen extends Component {
     const SEND_CODE_URL = 'https://us-central1-yin-timer-2.cloudfunctions.net/requestPassword';
 
     if (this.state.value && this.state.valid) {
-      let phone = await AsyncStorage.getItem('phone')
+      let phone = await AsyncStorage.setItem('phone', this.state.value)
 
-      if (phone === this.state.value) {
-        try {  
-          await axios.post(SEND_CODE_URL, { phone: phone });
-  
-          this.props.navigation.navigate('Validate');
-        } catch (error) {
-          this.setState({isLoading: false});
-          alert('Network error. Please try again.');
-          this.setState({isLoading: false});
-        }
-      } else {
-        alert("We're having trouble finding that user. Please try signing up.");
+      try {  
+        await axios.post(SEND_CODE_URL, { phone: phone });
+        this.props.navigation.navigate('Validate');
+      } catch (error) {
         this.setState({isLoading: false});
-        this.props.navigation.navigate('Signup');
+        alert('Network error. Please try again.');
+        this.setState({isLoading: false});
       }
     } else {
       alert('Invalid number provided.');
