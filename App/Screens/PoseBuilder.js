@@ -20,7 +20,6 @@ class PoseBuilderScreen extends Component {
     super()
     this.state = {
       userToken: '',
-      isSaving: false,
       name: '',
       duration: 1,
       difficulty: 1,
@@ -35,7 +34,7 @@ class PoseBuilderScreen extends Component {
       headerRight: (
         <Button
           transparent
-          rightIcon={{name: 'add', color: Colors.gong, size: 30}}
+          rightIcon={{name: 'add', color: params.saving ?  Colors.cloud : Colors.gong, size: 30}}
           onPress={() => params.handleSave() } />
       )
     }
@@ -61,7 +60,7 @@ class PoseBuilderScreen extends Component {
       targets: this.state.targets
     }
 
-    this.setState({isSaving: true});
+    this.props.navigation.setParams({saving: true });
 
     if (this.isValid(pose)) {
       try {
@@ -75,10 +74,10 @@ class PoseBuilderScreen extends Component {
         })
       } catch(error) {
         alert("We encountered an error. Please try again.")
-        this.setState({isLoading: false});
+        this.props.navigation.setParams({saving: false });
       }
     } else {
-      this.setState({isLoading: false});
+      this.props.navigation.setParams({saving: false });
     }
   }
 

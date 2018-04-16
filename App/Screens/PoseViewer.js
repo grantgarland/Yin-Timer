@@ -36,6 +36,16 @@ export default class PoseViewerScreen extends Component {
       return word.join(" ");
     }
 
+    renderDifficultyText = (difficulty) => {
+      if (difficulty === 1) {
+        return 'Beginner';
+      } else if (difficulty === 2) {
+        return 'Intermediate';
+      } else {
+        return 'Advanced'
+      }
+    }
+
     return (
       <Animated.View style={styles.cardContainer}>
         <Card
@@ -54,8 +64,10 @@ export default class PoseViewerScreen extends Component {
             <Text style={styles.headerText}>Duration</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={Fonts.style.h5}>{card.difficulty}/3</Text>
-            <Text style={Fonts.style.h5}>{card.duration} min</Text>
+            <Text style={Fonts.style.description}>
+              {renderDifficultyText(card.difficulty)}
+            </Text>
+            <Text style={Fonts.style.description}>{card.duration} min</Text>
           </View>
 
           <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}} >
