@@ -23,7 +23,7 @@ class LoginScreen extends Component {
   updateInfo(){
     this.setState({
         valid: this.refs.phone.isValidNumber(),
-        value: this.refs.phone.getValue()
+        value: this.refs.phone.getValue().replace(/[^\d]/g, '')
     })
   }
 
