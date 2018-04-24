@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
+import { Button, Card, FormLabel, FormInput, CheckBox } from 'react-native-elements'
 import Slider from "react-native-slider";
 import MultiSelect from 'react-native-multiple-select';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -22,7 +22,7 @@ class PoseBuilderScreen extends Component {
       userToken: '',
       name: '',
       duration: 1,
-      difficulty: 1,
+      twoSided: false,
       targets: [],
       selectedTargets: []
     }
@@ -56,7 +56,7 @@ class PoseBuilderScreen extends Component {
     const pose = {
       name: this.state.name,
       duration: this.state.duration,
-      difficulty: this.state.difficulty,
+      twoSided: this.state.twoSided,
       targets: this.state.targets
     }
 
@@ -94,19 +94,6 @@ class PoseBuilderScreen extends Component {
       return false
     } else {
       return true
-    }
-  }
-
-  difficultyText = () => {
-    switch (this.state.difficulty) {
-      case 1:
-        return 'Beginner';
-      case 2:
-        return 'Intermediate';
-      case 3:
-        return 'Advanced';
-      default:
-        return;
     }
   }
 
@@ -158,20 +145,6 @@ class PoseBuilderScreen extends Component {
               />
            </View>
 
-            <FormLabel>Difficulty: {this.difficultyText()}</FormLabel>
-            <View style={styles.sliderContainer}>
-              <Slider
-                value={this.state.difficulty}
-                minimumValue={1}
-                maximumValue={3}
-                step={1}
-                minimumTrackTintColor={Colors.gong}
-                maximumTrackTintColor={Colors.windowTint}
-                thumbTintColor={Colors.gong}
-                onValueChange={difficulty => this.setState({ difficulty })}
-              />
-            </View>
-
             <FormLabel>Hold Duration: {this.state.duration > 1 ? this.state.duration + ' minutes' : '1 minute'}</FormLabel>
             <View style={styles.sliderContainer}>
               <Slider
@@ -185,6 +158,17 @@ class PoseBuilderScreen extends Component {
                 onValueChange={duration => this.setState({ duration })}
               />
             </View>
+
+            <CheckBox
+              title='Two-sided pose?'
+              // containerStyle={styles.sliderContainer}
+              fontFamily={Fonts.type.base}
+              texStyle={{color: Colors.charcoal}}
+              iconRight
+              checked={this.state.twoSided}
+              checkedColor={Colors.gong}
+              onIconPress={() => this.setState({ twoSided: !this.state.twoSided })}
+            />
           </Card>
         </View>
       </View>
