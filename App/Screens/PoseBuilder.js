@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage} from 'react-native'
 import { connect } from 'react-redux';
 import { Button, Card, FormLabel, FormInput, CheckBox } from 'react-native-elements'
 import Slider from "react-native-slider";

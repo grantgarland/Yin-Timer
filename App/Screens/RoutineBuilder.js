@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux';
 import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
+import MultiSelect from 'react-native-multiple-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import * as actions from '../Redux/Actions/pose_actions';
@@ -9,14 +10,17 @@ import Styles from '../Themes/masterStyles';
 import Fonts from '../Themes/fonts';
 import Colors from '../Themes/colors';
 
+import axios from 'axios';
+
 class RoutineBuilderScreen extends Component {
   constructor () {
     super()
     this.state = {
-      isSaving: false,
+      userToken: '',
       routineName: '',
       poses: [],
       routineDuration: 0
+
     }
   }
 
@@ -33,33 +37,43 @@ class RoutineBuilderScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ handleSave: this.savePose });
+    this.props.navigation.setParams({ handleSave: this.saveRoutine });
+    this.getUserToken().then(res => this.setState({userToken: res})).then(() => this.getUserPoses())
   }
 
-  savePose = () => {
-    this.setState({isSaving: true});
+  async getUserToken() {
+    let token = await AsyncStorage.getItem('phone');
 
-    const routine = {
-      name: this.state.routineName,
-      duration: this.state.routineDuration,
-      poses: this.state.poses
-    }
-
-    if (this.isValid(routine)) {
-      console.log(routine)
-    }
+    return token.substr(1);
   }
 
-  isValid = (routine) => {
-    if (!this.state.routineName) {
-      alert('Please provide a routine name');
-      return false
-    } else if ( this.state.poses.length < 3) {
-      alert('Please select at least 3 poses');
-      return false
-    } else {
-      return true
-    }
+  getUserPoses() {
+    const GET_POSES_URL='https://us-central1-yin-timer-2.cloudfunctions.net/getPoses';
+
+    this.props.navigation.setParams({saving: true });
+  
+    try {
+      this.deployCloudFunction(GET_POSES_URL, this.state.userToken)
+        .then(res => {
+          if (res.status === 200) {
+            console.log(res.data)
+            this.props.navigation.navigate('Home');
+          } else {
+            alert("Error connecting to the network. Please try again.");
+            this.props.navigation.setParams({saving: false });
+          }})
+        } catch(error) {
+          alert("We encountered an error. Please try again.")
+          this.props.navigation.setParams({saving: false });
+      }
+  }
+
+  saveRoutine = () => {
+  
+  }
+
+  async deployCloudFunction(url, token) {
+    return await axios.post(url, { token }); 
   }
 
   render () {
@@ -79,10 +93,6 @@ class RoutineBuilderScreen extends Component {
       </View>
     )
   }
-}
-
-function mapStateToProps() {
-
 }
 
 export default connect(null, actions)(RoutineBuilderScreen)
